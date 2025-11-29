@@ -1,8 +1,8 @@
 [
     {
         "key": "C2O4-T2AD-ZLHI-Q2JW-C628A1",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "04004330c8053bbfd47899654c991fe5b805f7007728ad1ff284b843d5eb0ab5",
         "active": true
     }
 ]
