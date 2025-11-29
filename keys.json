@@ -4,5 +4,11 @@
         "used": true,
         "hwid": "04004330c8053bbfd47899654c991fe5b805f7007728ad1ff284b843d5eb0ab5",
         "active": true
+    },
+    {
+        "key": "14P8-BRQQ-NYIK-ZBLN-8F0974",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
