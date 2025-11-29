@@ -28,6 +28,11 @@ def validate():
 
     for entry in db:
         if entry["key"] == key:
+
+            # ✅ Manual deactivation check (this was missing)
+            if entry.get("active", True) is False:
+                return jsonify({"status": "denied", "msg": "This key has been deactivated"})
+
             # First activation = bind HWID
             if entry["used"] is False:
                 entry["used"] = True
