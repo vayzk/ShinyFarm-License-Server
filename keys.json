@@ -130,5 +130,11 @@
         "used": false,
         "hwid": null,
         "active": true
+    },
+    {
+        "key": "GMTI-VNEG-6TYZ-H9VV-50E854",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
