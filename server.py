@@ -26,10 +26,15 @@ def validate():
 
     db = load_db()
 
-    for entry in db:
-        if entry["key"] == key:
+    # Normalization helper (inline as requested)
+    def _norm(k):
+        return k.replace("-", "").upper()
 
-            # ✅ Manual deactivation check (this was missing)
+    for entry in db:
+        # *** FIXED COMPARISON ***
+        if _norm(entry["key"]) == _norm(key):
+
+            # Manual deactivation check
             if entry.get("active", True) is False:
                 return jsonify({"status": "denied", "msg": "This key has been deactivated"})
 
