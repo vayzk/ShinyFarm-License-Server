@@ -2,28 +2,31 @@ from flask import Flask, request, jsonify
 import json
 import os
 
-DATABASE_FILE = "keys.json"
+# Always resolve keys.json relative to this file so it works on Render, too.
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE_FILE = os.path.join(BASE_DIR, "keys.json")
+
 app = Flask(__name__)
 
 
 def load_db():
     if not os.path.isfile(DATABASE_FILE):
-        print("[DEBUG] keys.json not found, returning empty DB")
+        print("[SERVER] keys.json not found at:", DATABASE_FILE)
         return []
     with open(DATABASE_FILE, "r") as f:
         db = json.load(f)
-    print(f"[DEBUG] Loaded DB with {len(db)} entries")
+    print(f"[SERVER] Loaded DB with {len(db)} entries")
     return db
 
 
 def save_db(db):
     with open(DATABASE_FILE, "w") as f:
         json.dump(db, f, indent=4)
-    print("[DEBUG] DB saved to keys.json")
+    print("[SERVER] DB saved to keys.json")
 
 
-# Normalization helper (top-level so we can use in debug prints)
 def _norm(k: str) -> str:
+    """Normalize a license key: remove hyphens and uppercase."""
     if not isinstance(k, str):
         return ""
     return k.replace("-", "").upper()
@@ -36,47 +39,40 @@ def validate():
     hwid = data.get("hwid")
 
     print("\n========== /validate called ==========")
-    print("[DEBUG] Raw client key:", repr(key))
-    print("[DEBUG] Raw client hwid:", repr(hwid))
+    print("[SERVER] Raw client key:", repr(key))
+    print("[SERVER] Raw client HWID:", repr(hwid))
 
     if not key or not hwid:
-        print("[DEBUG] Missing key or hwid branch")
+        print("[SERVER] Missing key or HWID")
         return jsonify({"status": "error", "msg": "Missing key or hwid"}), 400
 
     db = load_db()
-
-    # Extra: if DB is empty, that's a huge red flag
     if not db:
-        print("[DEBUG] WARNING: DB is empty. No keys to compare against.")
+        print("[SERVER] WARNING: DB empty, no keys to compare.")
+        return jsonify({"status": "denied", "msg": "Invalid key"})
 
-    # Precompute normalized client key once
     norm_client_key = _norm(key)
-    print("[DEBUG] Normalized client key:", norm_client_key)
+    print("[SERVER] Normalized client key:", norm_client_key)
 
     for idx, entry in enumerate(db):
         stored_key = entry.get("key")
         norm_stored_key = _norm(stored_key)
 
-        print(f"\n[DEBUG] Checking entry #{idx}")
-        print("[DEBUG] Stored key:", repr(stored_key))
-        print("[DEBUG] Normalized stored key:", norm_stored_key)
-
-        # --- KEY COMPARISON ---
-        print("[DEBUG] Comparing normalized keys...")
-        print(f"[DEBUG]   client : {norm_client_key}")
-        print(f"[DEBUG]   stored : {norm_stored_key}")
+        print(f"[SERVER] Checking entry #{idx}")
+        print("[SERVER]   Stored key:", repr(stored_key))
+        print("[SERVER]   Norm stored:", norm_stored_key)
 
         if norm_stored_key == norm_client_key:
-            print("[DEBUG] MATCH: key found in DB")
+            print("[SERVER] MATCH: key found in DB")
 
             # Manual deactivation check
             if entry.get("active", True) is False:
-                print("[DEBUG] Deactivated key branch")
+                print("[SERVER] Deactivated key branch")
                 return jsonify({"status": "denied", "msg": "This key has been deactivated"})
 
             # First activation = bind HWID
             if entry["used"] is False:
-                print("[DEBUG] First activation branch")
+                print("[SERVER] First activation branch")
                 entry["used"] = True
                 entry["hwid"] = hwid
                 save_db(db)
@@ -84,16 +80,16 @@ def validate():
 
             # Already used → check HWID
             if entry["hwid"] == hwid:
-                print("[DEBUG] Already activated branch")
+                print("[SERVER] Already activated branch")
                 return jsonify({"status": "ok", "msg": "Already activated"})
 
-            print("[DEBUG] Used on another PC branch")
+            print("[SERVER] Used on another PC branch")
             return jsonify({"status": "denied", "msg": "Key already used on another PC"})
 
         else:
-            print("[DEBUG] No match for this entry, continuing...")
+            print("[SERVER] No match with this entry, continuing...")
 
-    print("[DEBUG] Invalid key branch (no entries matched)")
+    print("[SERVER] Invalid key branch (no entries matched)")
     return jsonify({"status": "denied", "msg": "Invalid key"})
 
 
@@ -103,4 +99,5 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run()
+    # For local testing, on Render you’ll use gunicorn instead
+    app.run(host="0.0.0.0", port=5000)
