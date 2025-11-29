@@ -7,34 +7,37 @@ import requests
 app = Flask(__name__)
 
 # --------------------------------------------------------
-#   CONFIG
+#   SETTINGS
 # --------------------------------------------------------
+# Lokale Datei auf dem Server (Render)
 KEYS_FILE = "keys.json"
 
-# GitHub config (MUSS ausgefüllt sein!)
+# GitHub Repo Einstellungen
 GITHUB_USER = "vayzk"
 REPO_NAME = "ShinyFarm-License-Server"
 FILE_PATH = "keys.json"
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")  # bei Render unter "Environment Variables" setzen!
+
+# In Render unter "Environment Variables" hinzufügen
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
 
 # --------------------------------------------------------
-#   LOAD & SAVE
+#   HELPERS – LOAD / SAVE
 # --------------------------------------------------------
 def load_db():
     if not os.path.isfile(KEYS_FILE):
         return []
-    with open(KEYS_FILE, "r") as f:
+    with open(KEYS_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def save_db(db):
-    with open(KEYS_FILE, "w") as f:
+    with open(KEYS_FILE, "w", encoding="utf-8") as f:
         json.dump(db, f, indent=4)
 
 
 # --------------------------------------------------------
-#   GITHUB SYNC
+#   GITHUB FUNCTIONS (SYNC keys.json)
 # --------------------------------------------------------
 def github_headers():
     return {
@@ -44,23 +47,36 @@ def github_headers():
 
 
 def github_download_sha():
-    """Get SHA for keys.json so GitHub allows overwriting."""
+    """
+    Holt die SHA des aktuellen keys.json auf GitHub.
+    GitHub verlangt diese SHA, um Dateien zu überschreiben.
+    """
     url = f"https://api.github.com/repos/{GITHUB_USER}/{REPO_NAME}/contents/{FILE_PATH}"
     r = requests.get(url, headers=github_headers())
+
     if r.status_code == 200:
         return r.json()["sha"]
+
+    print("❌ Fehler: SHA konnte nicht geladen werden:", r.text)
     return None
 
 
 def github_upload_keys(keys):
-    """Upload updated keys.json to GitHub."""
+    """
+    Lädt keys.json zum GitHub Repository hoch.
+    """
+    if not GITHUB_TOKEN:
+        print("❌ Kein GitHub Token gesetzt!")
+        return
+
     sha = github_download_sha()
     if sha is None:
-        print("❌ GitHub: Failed to fetch SHA")
+        print("❌ GitHub SHA fehlgeschlagen.")
         return
 
     url = f"https://api.github.com/repos/{GITHUB_USER}/{REPO_NAME}/contents/{FILE_PATH}"
 
+    # keys.json in Base64 encodieren
     encoded = base64.b64encode(json.dumps(keys, indent=4).encode()).decode()
 
     payload = {
@@ -70,17 +86,18 @@ def github_upload_keys(keys):
     }
 
     r = requests.put(url, headers=github_headers(), json=payload)
+
     if r.status_code in (200, 201):
-        print("✅ GitHub keys.json updated successfully")
+        print("✅ GitHub keys.json erfolgreich aktualisiert.")
     else:
-        print("❌ GitHub upload failed:", r.text)
+        print("❌ GitHub Upload Fehler:", r.text)
 
 
 # --------------------------------------------------------
 #   VALIDATION ENDPOINT
 # --------------------------------------------------------
 @app.route("/validate", methods=["POST"])
-def validate():
+def validate_key():
     data = request.get_json()
 
     key = data.get("key")
@@ -94,35 +111,35 @@ def validate():
     for entry in db:
         if entry["key"] == key:
 
-            # Deactivated key?
+            # Deaktivierter Key?
             if entry.get("active", True) is False:
                 return jsonify({"status": "denied", "msg": "Key deactivated"})
 
-            # First time activation → set HWID
+            # ERSTE Aktivierung → HWID setzen
             if entry["used"] is False:
                 entry["used"] = True
                 entry["hwid"] = hwid
 
-                save_db(db)
-                github_upload_keys(db)        # <── HIER passiert die Magie
+                save_db(db)          # Lokal speichern (Render)
+                github_upload_keys(db)  # Und auf GitHub synchronisieren ★★ WICHTIG ★★
 
                 return jsonify({"status": "ok"})
 
-            # Already used on THIS PC
+            # Key erneut auf dem SELBEN PC → OK
             if entry["hwid"] == hwid:
                 return jsonify({"status": "ok"})
 
-            # Already used on OTHER PC
+            # Key wurde bereits auf ANDEREM Gerät benutzt
             return jsonify({"status": "denied", "msg": "Key already used on another PC"})
 
     return jsonify({"status": "denied", "msg": "Invalid key"})
 
 
 # --------------------------------------------------------
-#   LIST KEYS ENDPOINT (for KEY_MANAGER)
+#   SEND FULL KEYS (for key_manager.py)
 # --------------------------------------------------------
 @app.route("/keys", methods=["GET"])
-def get_keys():
+def get_all_keys():
     db = load_db()
     return jsonify(db)
 
@@ -132,11 +149,11 @@ def get_keys():
 # --------------------------------------------------------
 @app.route("/", methods=["GET"])
 def home():
-    return "ShinyFarm License Server Running"
+    return "ShinyFarm License Server is running."
 
 
 # --------------------------------------------------------
-#   RUN
+#   START SERVER
 # --------------------------------------------------------
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
