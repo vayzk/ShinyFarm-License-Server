@@ -3,5 +3,11 @@
         "key": "TEST-1234-5678-AAAA-BBEEFF",
         "used": false,
         "hwid": null
+    },
+    {
+        "key": "Q3A3-OG5D-XZQP-LHX1-853EE6",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
