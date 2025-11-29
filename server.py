@@ -7,6 +7,9 @@ app = Flask(__name__)
 KEYFILE = "keys.json"
 
 
+# -------------------------------------------------
+# KEYS LOADING / SAVING
+# -------------------------------------------------
 def load_keys():
     if not os.path.exists(KEYFILE):
         return []
@@ -19,18 +22,15 @@ def save_keys(keys):
         json.dump(keys, f, indent=4)
 
 
-@app.route("/get_keys", methods=["GET"])
-def get_keys():
-    """Client lädt keys.json über GitHub, NICHT hier — aber als Fallback"""
-    return jsonify(load_keys())
-
-
+# -------------------------------------------------
+# VALIDATION ENDPOINT (Client uses this)
+# -------------------------------------------------
 @app.route("/validate", methods=["POST"])
 def validate():
     data = request.json
 
     if "key" not in data or "hwid" not in data:
-        return jsonify({"success": False, "message": "Missing fields"})
+        return jsonify({"status": "error", "msg": "Missing fields"})
 
     key_input = data["key"]
     hwid_input = data["hwid"]
@@ -38,23 +38,25 @@ def validate():
     keys = load_keys()
 
     for entry in keys:
+
         if entry["key"] == key_input:
 
-            if not entry["active"]:
-                return jsonify({"success": False, "message": "Key deactivated"})
+            # Check deactivated keys
+            if not entry.get("active", True):
+                return jsonify({"status": "error", "msg": "Key deactivated"})
 
-            # HWID check
-            if entry["used"] and entry["hwid"] != hwid_input:
-                return jsonify({"success": False, "message": "Key already used on another PC"})
+            # HWID already assigned to someone else?
+            if entry.get("used", False) and entry.get("hwid") != hwid_input:
+                return jsonify({"status": "error", "msg": "Key already used on another PC"})
 
-            # Assign HWID
+            # Assign HWID if unused
             entry["used"] = True
             entry["hwid"] = hwid_input
             save_keys(keys)
 
-            return jsonify({"success": True, "message": "OK"})
+            return jsonify({"status": "ok", "msg": "OK"})
 
-    return jsonify({"success": False, "message": "Invalid key"})
+    return jsonify({"status": "error", "msg": "Invalid key"})
 
 
 @app.route("/")
