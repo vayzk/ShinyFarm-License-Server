@@ -1,8 +1,8 @@
 [
     {
         "key": "CB5E-JQ29-HVAF-YYBC-1DC480",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "46d48618009a50ffd548138942224cac7c6b85e8cce5a256b152feae56054769",
         "active": true
     }
 ]
