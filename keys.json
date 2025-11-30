@@ -31,8 +31,8 @@
     },
     {
         "key": "2COY-PL8P-7UUU-7S2X-6F8357",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "4c8c96ce38dd2e2192550543d753006cbdfc8304ccf1b0a2f3e8a26b2afe6c1b",
         "active": true
     },
     {
