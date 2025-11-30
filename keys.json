@@ -37,8 +37,8 @@
     },
     {
         "key": "MVO3-AHK4-1K7K-NRD2-8529CB",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "01194328da0f66c101146d231af45c3baf637dcb6242b821898ced16ed7f2ca8",
         "active": true
     },
     {
