@@ -43,8 +43,8 @@
     },
     {
         "key": "3DRO-O3VT-NA75-TBE7-A294D2",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "3b87545bcf4f1005dfb38db562b34982a4e4a9cc79692f771e4e8467d97e12f3",
         "active": true
     },
     {
