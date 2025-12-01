@@ -67,8 +67,8 @@
     },
     {
         "key": "1GLI-NV8W-G3ZU-T89R-97F39C",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "3ac2dd5c81e05db933cf223735e85edbc57891e5a80c27b222c022c5611ba4e0",
         "active": true
     },
     {
