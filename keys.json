@@ -73,8 +73,8 @@
     },
     {
         "key": "5ML2-Y1PU-XA0T-FY8V-26A09D",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "1afff0bbec3a186fce889a93b0485bed32bd62bd3ab6552aa8db9ce442c92800",
         "active": true
     },
     {
