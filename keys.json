@@ -55,8 +55,8 @@
     },
     {
         "key": "NEHF-GLV7-M5U4-D2AW-91A78E",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "b5dc5ff9a1ea4af3d2764d400d8292cb5685a8c50ce3e8f3a0c677f0c28768cb",
         "active": true
     },
     {
