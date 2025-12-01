@@ -49,8 +49,8 @@
     },
     {
         "key": "D8BF-3L4D-4TXJ-KJFG-D81466",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "b5dc5ff9a1ea4af3d2764d400d8292cb5685a8c50ce3e8f3a0c677f0c28768cb",
         "active": true
     },
     {
