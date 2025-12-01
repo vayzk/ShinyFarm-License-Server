@@ -79,8 +79,8 @@
     },
     {
         "key": "R2OW-QHXG-NX3E-RHSH-3C8AE2",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "da12c7635816b000ecc245e8693bb2050d139909294446ebbc359ccd9530799e",
         "active": true
     },
     {
