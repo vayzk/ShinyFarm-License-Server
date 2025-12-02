@@ -97,8 +97,8 @@
     },
     {
         "key": "I8SX-QXGM-UO5E-K5Q5-ED3A70",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "3c809c4cd75786d3d15c4b2473238b83a3ceb8afdb90fde15603d5edfa538b56",
         "active": true
     },
     {
