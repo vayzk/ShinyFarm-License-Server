@@ -172,5 +172,11 @@
         "used": true,
         "hwid": "a8aa9bb04f0214e18ffb6d07fb5f737f7e0d19e0871599d6759131a0e00412cb",
         "active": true
+    },
+    {
+        "key": "Q613-B46B-5VD2-QRWR-9E930B",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
