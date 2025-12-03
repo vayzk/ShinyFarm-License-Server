@@ -175,8 +175,8 @@
     },
     {
         "key": "Q613-B46B-5VD2-QRWR-9E930B",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "7615499ab024535bcc2a3cfddff6920cea6b31b06d82ce216dd7efd850f3d3eb",
         "active": true
     }
 ]
