@@ -136,5 +136,11 @@
         "used": true,
         "hwid": "e46a28900a798ecde7b2b70495e341fac19c057ea1046311b2dcd22f81b0ca9d",
         "active": true
+    },
+    {
+        "key": "D6KK-7NMB-GECX-VX1Z-FD1015",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
