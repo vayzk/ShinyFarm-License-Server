@@ -121,8 +121,8 @@
     },
     {
         "key": "081X-6GJ7-X95N-V942-ECCD52",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "48d99a20d6024052a2c7cb73c5b7e3229f707f09f9b94e01831865458bfa9edb",
         "active": true
     }
 ]
