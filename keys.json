@@ -115,8 +115,8 @@
     },
     {
         "key": "6EWP-FNIB-YEKD-LPQ1-AE1C49",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "20ad852b3f9b0ad97d6f7ba8ff26ddc0fcad8d220503be10a036b3ca58f7880f",
         "active": true
     },
     {
