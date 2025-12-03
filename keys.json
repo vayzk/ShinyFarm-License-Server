@@ -133,8 +133,8 @@
     },
     {
         "key": "FP3U-GUOA-V46T-O6C1-A21D22",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "e46a28900a798ecde7b2b70495e341fac19c057ea1046311b2dcd22f81b0ca9d",
         "active": true
     }
 ]
