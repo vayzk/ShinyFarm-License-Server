@@ -178,5 +178,11 @@
         "used": true,
         "hwid": "7615499ab024535bcc2a3cfddff6920cea6b31b06d82ce216dd7efd850f3d3eb",
         "active": true
+    },
+    {
+        "key": "VYZE-XQ33-83ZI-MTSB-F9E277",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
