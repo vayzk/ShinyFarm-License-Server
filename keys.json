@@ -145,8 +145,8 @@
     },
     {
         "key": "G59R-19LO-2E1V-9V8A-8624BF",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "3f99176f1ebb9c00ea9931ced6ace1f19d5c73316709acd07a3d4092a8f7ae9e",
         "active": true
     }
 ]
