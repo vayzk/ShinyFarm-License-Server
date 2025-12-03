@@ -124,5 +124,11 @@
         "used": true,
         "hwid": "48d99a20d6024052a2c7cb73c5b7e3229f707f09f9b94e01831865458bfa9edb",
         "active": true
+    },
+    {
+        "key": "3ECF-QZOW-VZ4M-J77D-8E7A43",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
