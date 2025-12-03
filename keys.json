@@ -157,8 +157,8 @@
     },
     {
         "key": "W82I-VC40-U67J-0HRD-86A641",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "7c9732c6398ac5a46cc50d1a9957b196457ab8acd434173e56b227ba8ca27bbd",
         "active": true
     },
     {
