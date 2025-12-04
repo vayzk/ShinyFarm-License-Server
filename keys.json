@@ -202,5 +202,11 @@
         "used": true,
         "hwid": "46d48618009a50ffd548138942224cac7c6b85e8cce5a256b152feae56054769",
         "active": true
+    },
+    {
+        "key": "OWG3-NWVD-UOC1-KLJE-AC2526",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
