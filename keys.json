@@ -190,5 +190,11 @@
         "used": true,
         "hwid": "0x74563c7c594e",
         "active": true
+    },
+    {
+        "key": "9T9C-VP44-9WOM-GFO9-601D1F",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
