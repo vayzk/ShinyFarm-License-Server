@@ -205,8 +205,8 @@
     },
     {
         "key": "OWG3-NWVD-UOC1-KLJE-AC2526",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "375f876fb5dfbf1789873eef02535910d08c58bfc3e685456cc8f38fd7006ed6",
         "active": true
     }
 ]
