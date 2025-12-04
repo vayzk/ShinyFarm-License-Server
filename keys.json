@@ -208,5 +208,11 @@
         "used": true,
         "hwid": "375f876fb5dfbf1789873eef02535910d08c58bfc3e685456cc8f38fd7006ed6",
         "active": true
+    },
+    {
+        "key": "I8VH-13WP-Q2AL-CSIH-7321A7",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
