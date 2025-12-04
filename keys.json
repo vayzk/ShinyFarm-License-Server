@@ -187,8 +187,8 @@
     },
     {
         "key": "2ZB1-M0HX-WI05-S0MX-978F79",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "0x74563c7c594e",
         "active": true
     }
 ]
