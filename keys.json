@@ -199,8 +199,8 @@
     },
     {
         "key": "Q4YO-2715-SSSC-TAVB-D39D44",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "46d48618009a50ffd548138942224cac7c6b85e8cce5a256b152feae56054769",
         "active": true
     }
 ]
