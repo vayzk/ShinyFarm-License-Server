@@ -226,5 +226,11 @@
         "used": true,
         "hwid": "873df803d98c8cfc5702c751a2d3a18166c83203346997315c11d2d14d8e80e9",
         "active": true
+    },
+    {
+        "key": "AUK4-1CY1-N9G1-170C-EFC1ED",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
