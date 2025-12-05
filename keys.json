@@ -226,5 +226,11 @@
         "used": true,
         "hwid": "46d48618009a50ffd548138942224cac7c6b85e8cce5a256b152feae56054769",
         "active": true
+    },
+    {
+        "key": "TWPV-1Q08-1P3Q-GH9W-CFB362",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
