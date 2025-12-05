@@ -220,5 +220,11 @@
         "used": true,
         "hwid": "46d48618009a50ffd548138942224cac7c6b85e8cce5a256b152feae56054769",
         "active": true
+    },
+    {
+        "key": "ANV1-Y2MR-NARV-73CY-C57B92",
+        "used": false,
+        "hwid": null,
+        "active": true
     }
 ]
