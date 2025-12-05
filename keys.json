@@ -223,8 +223,8 @@
     },
     {
         "key": "PTEF-9VGR-QHG8-JEO6-86F61B",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "9ec73031f7e8fd23c24fef864d66889d16bfb7f5e7ef34615116c6036f033406",
         "active": true
     }
 ]
