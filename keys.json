@@ -211,8 +211,8 @@
     },
     {
         "key": "4FTA-UA58-27ZQ-QZ7P-A6D745",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "b5216d1c9c8fc5aee159df36fdd51ec8a8f1fd3597746a24641f5152813df381",
         "active": true
     },
     {
