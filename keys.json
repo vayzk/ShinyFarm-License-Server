@@ -229,8 +229,8 @@
     },
     {
         "key": "R5M3-BU37-YQGM-YJRN-4CE953",
-        "used": false,
-        "hwid": null,
+        "used": true,
+        "hwid": "f81508df46a6ba4634da93d1bf8e3732979c43110dc1bea736255bf1c264d067",
         "active": true
     }
 ]
